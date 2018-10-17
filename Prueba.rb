@@ -12,13 +12,15 @@
 test_options = ['Opción 01: Crear Archivo',
                 'Opción 02: Mostrar Inasistencias',
                 'Opción 03: Mostrar Alumnos Aprobados',
-                'Opción 04; Salir del Programa']
+                'Opción 04: Salir del Programa']
 
 option_selected = 0
 
 test_welcome_message = 'Bienvenido al Software de Revisión de Notas y Asistencia :)'
 
 new_welcome_message = 'Ingrese una opción de 1 a 3 si desea realizar más acciones dentro del programa, ingrese 4 para Salir :)'
+
+option_exit = test_options.length
 
 # 2- Declaración de procesamiento
 
@@ -40,6 +42,8 @@ def welcome_message(message)
 end
 
 def show_menu(menu_options)
+    menu_text = menu_options.join("\n")
+    puts menu_text
 end
 # Opción 1
 def create_average_score_file
@@ -62,7 +66,7 @@ welcome_message(test_welcome_message)
 show_menu(test_options)
 
 while (option_selected != option_exit) do
-    option_selected = escoger_alternativa(options)
+    option_selected = pick_alternative(test_options)
     case option_selected
     when 1
         create_average_score_file
