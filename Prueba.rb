@@ -76,15 +76,22 @@ def show_absence(file_name)
   file = File.open(file_name, 'r')
   students = file.readlines.map{ |lines| lines.chomp }.map{|lines| lines.strip.split(",")}
   file.close
+  course_absences = 0
   students.each do |element|
     student_name = element.first
-    absences = element.count('A') 
+    absences = element.count('A')
+    course_absences += element.count('A')
   puts "El #{student_name} tiene #{absences} inasistencias."
   end
+  puts "El total de inasistencias del curso es de #{course_absences}"
 end
 
 # Opción 3
-def show_approved_students(file_name)
+def show_approved_students(file_name,approval_score)
+  file = File.open(file_name, 'r')
+  students = file.readlines.map{ |lines| lines.chomp }.map{|lines| lines.strip.split(",")}
+  file.close
+
 end
 # Opción 4
 def close_session
