@@ -30,8 +30,8 @@ def pick_alternative(options)
   options_quantity = options.length
 
     while !(0 < alternative_transformed and alternative_transformed <= options_quantity)
-      puts "Tu alternativa es #{alternative_selected}"
-      puts "Debes escoger un número entre 1 y #{options_quantity}"
+      puts "Escribiste '#{alternative_selected}', y ésta es una opción no válida :(."
+      puts "Debes escoger un número entre '1' y '#{options_quantity}'"
       alternative_selected = gets.chomp
       alternative_transformed = alternative_selected.to_i
     end
@@ -39,14 +39,44 @@ def pick_alternative(options)
 end
 
 def welcome_message(message)
+  puts message
 end
 
 def show_menu(menu_options)
-    menu_text = menu_options.join("\n")
-    puts menu_text
+  menu_text = menu_options.join("\n")
+  puts menu_text
 end
+
 # Opción 1
-def create_average_score_file
+def create_average_score_file(file_name)
+  file = File.open(file_name, 'r')
+  # Se asume que la inasistencia se cuenta como 0, sin punto base :(
+  students = file.readlines.map{ |lines| lines.chomp }.map{ |lines| lines.tr('A','0')}.map{|lines| lines.strip.split(",")}
+  file.close
+  # print students
+
+  students.each do |e|
+    nombre = e.first
+    notas = e[1..5]
+    sum = 0
+    notas.each do |n|
+      sum += n.to_i
+    end
+    p "la nota de #{nombre} es de :"
+    p sum / 5
+  end
+  
+
+  #return students
+  #shift para elegir el primer elemento de cada array
+  #students.each_with_index do | student, index |
+   # print student.shift + ": "
+    #print student[0..student.length]
+    #puts (student.shift)[0..index]
+    #puts student[index][1]   
+#.inject(1.0) { |sum, element| sum + element }.to_f / students.size
+  #end
+
 end
 # Opción 2
 def show_absence(file_name)
@@ -69,7 +99,7 @@ while (option_selected != option_exit) do
     option_selected = pick_alternative(test_options)
     case option_selected
     when 1
-        create_average_score_file
+        create_average_score_file('alumnos.csv')
         welcome_message(new_welcome_message)
     when 2
         show_absence(file_name)
