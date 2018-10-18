@@ -54,7 +54,7 @@ def create_average_score_file(file_name)
   students = file.readlines.map{ |lines| lines.chomp }.map{ |lines| lines.tr('A','0')}.map{|lines| lines.strip.split(",")}
   file.close
   # print students
-  file = File.open("PromedioNotas.txt", "w")
+  file = File.open('PromedioNotas.txt', 'w')
   students.each do |element|
     student_name = element.first
     scores = element[1..element.length]
@@ -62,10 +62,9 @@ def create_average_score_file(file_name)
     student_average_score = 0
     scores.each do |score|
       sum += score.to_i
-      student_average_score = (sum/(element.length - 1)).to_f
+      student_average_score = (sum/(element.length - 1).to_f)
       # Se quita 1 al método length para eliminar el elemento Nombre
     end
-
     file.write "la nota promedio del estudiante #{student_name} es de:"
     file.write " #{student_average_score} \n"
   end
@@ -74,7 +73,16 @@ end
 
 # Opción 2
 def show_absence(file_name)
+  file = File.open(file_name, 'r')
+  students = file.readlines.map{ |lines| lines.chomp }.map{|lines| lines.strip.split(",")}
+  file.close
+  students.each do |element|
+    student_name = element.first
+    absences = element.count('A') 
+  puts "El #{student_name} tiene #{absences} inasistencias."
+  end
 end
+
 # Opción 3
 def show_approved_students(file_name)
 end
@@ -96,7 +104,7 @@ while (option_selected != option_exit) do
         create_average_score_file('alumnos.csv')
         welcome_message(new_welcome_message)
     when 2
-        show_absence(file_name)
+        show_absence('alumnos.csv')
         welcome_message(new_welcome_message)
     when 3
         show_approved_students(file_name)
