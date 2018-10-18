@@ -54,30 +54,24 @@ def create_average_score_file(file_name)
   students = file.readlines.map{ |lines| lines.chomp }.map{ |lines| lines.tr('A','0')}.map{|lines| lines.strip.split(",")}
   file.close
   # print students
-
-  students.each do |e|
-    nombre = e.first
-    notas = e[1..5]
+  file = File.open("PromedioNotas.txt", "w")
+  students.each do |element|
+    student_name = element.first
+    scores = element[1..element.length]
     sum = 0
-    notas.each do |n|
-      sum += n.to_i
+    student_average_score = 0
+    scores.each do |score|
+      sum += score.to_i
+      student_average_score = (sum/(element.length - 1)).to_f
+      # Se quita 1 al método length para eliminar el elemento Nombre
     end
-    p "la nota de #{nombre} es de :"
-    p sum / 5
+
+    file.write "la nota promedio del estudiante #{student_name} es de:"
+    file.write " #{student_average_score} \n"
   end
-  
-
-  #return students
-  #shift para elegir el primer elemento de cada array
-  #students.each_with_index do | student, index |
-   # print student.shift + ": "
-    #print student[0..student.length]
-    #puts (student.shift)[0..index]
-    #puts student[index][1]   
-#.inject(1.0) { |sum, element| sum + element }.to_f / students.size
-  #end
-
+  file.close
 end
+
 # Opción 2
 def show_absence(file_name)
 end

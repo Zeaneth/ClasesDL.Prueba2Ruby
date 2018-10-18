@@ -1,0 +1,4 @@
+la nota promedio del estudiante David es de: 3.0 
+la nota promedio del estudiante Gonzalo es de: 4.0 
+la nota promedio del estudiante Mai es de: 7.0 
+la nota promedio del estudiante JP es de: 10.0 
