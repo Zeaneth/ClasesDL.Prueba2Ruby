@@ -81,18 +81,36 @@ def show_absence(file_name)
     student_name = element.first
     absences = element.count('A')
     course_absences += element.count('A')
-  puts "El #{student_name} tiene #{absences} inasistencias."
+    puts "#{student_name} tiene #{absences} inasistencias."
   end
   puts "El total de inasistencias del curso es de #{course_absences}"
 end
 
 # Opción 3
-def show_approved_students(file_name,approval_score)
+def show_approved_students(file_name)
   file = File.open(file_name, 'r')
-  students = file.readlines.map{ |lines| lines.chomp }.map{|lines| lines.strip.split(",")}
+  students = file.readlines.map{ |lines| lines.chomp }.map{ |lines| lines.tr('A','0')}.map{|lines| lines.strip.split(",")}
   file.close
+  puts 'Para conocer los estudiantes aprobados, favor escriba la nota mínima necesaria para aprobar :)'
+  approval_score = gets.chomp.to_f
+  students_approved = 0
 
+  students.each do |element|
+    scores = element[1..element.length]
+    sum = 0
+    student_average_score = 0
+    scores.each do |score|
+      sum += score.to_i
+      student_average_score = (sum/(element.length - 1).to_f)
+      # Se quita 1 al método length para eliminar el elemento Nombre
+    end
+    if approval_score <= student_average_score
+      then students_approved += 1
+    end
+  end
+  puts "La cantidad de alumnos approbados del curso es: #{students_approved}"
 end
+
 # Opción 4
 def close_session
     print "Elegiste Salir, kbye~"
@@ -114,7 +132,7 @@ while (option_selected != option_exit) do
         show_absence('alumnos.csv')
         welcome_message(new_welcome_message)
     when 3
-        show_approved_students(file_name)
+        show_approved_students('alumnos.csv')
         welcome_message(new_welcome_message)
     when option_exit
         close_session
