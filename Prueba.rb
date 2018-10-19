@@ -91,8 +91,17 @@ def show_approved_students(file_name)
   file = File.open(file_name, 'r')
   students = file.readlines.map{ |lines| lines.chomp }.map{ |lines| lines.tr('A','0')}.map{|lines| lines.strip.split(",")}
   file.close
-  puts 'Para conocer los estudiantes aprobados, favor escriba la nota mínima necesaria para aprobar :)'
+  puts 'Escriba una nota mínima para considerarla como criterio de aprobación.'
+  puts 'Si su respuesta no es una nota o cero, la nota de aprobación por defecto será de 5.0'
   approval_score = gets.chomp.to_f
+  
+  if approval_score != 0.0
+    puts "La nueva nota mínima para aprobar es de #{approval_score}"
+  else
+    approval_score = 5.0
+    puts "La nota mínima para aprobar se mantendrá como #{approval_score}"
+  end
+
   students_approved = 0
 
   students.each do |element|
