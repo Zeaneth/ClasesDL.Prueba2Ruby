@@ -9,14 +9,14 @@
 # Hay un archivo csv "alumnos" con 5 notas. Si no asistió a evaluación, se considera como inasistencia (las notas son asistencias).
 
 
-test_options = ['Opción 01: Crear Archivo',
-                'Opción 02: Mostrar Inasistencias',
-                'Opción 03: Mostrar Alumnos Aprobados',
-                'Opción 04: Salir del Programa']
+test_options = ['Opción 1: Crear Archivo',
+                'Opción 2: Mostrar Inasistencias',
+                'Opción 3: Mostrar Alumnos Aprobados',
+                'Opción 4: Salir del Programa']
 
 option_selected = 0
 
-test_welcome_message = 'Bienvenido al Software de Revisión de Notas y Asistencia :)'
+test_welcome_message = 'Bienvenido al Software de Revisión de Notas y Asistencia. Para comenzar, digite el número de alguna de las siguientes opciones :)'
 
 new_welcome_message = 'Ingrese una opción de 1 a 3 si desea realizar más acciones dentro del programa, ingrese 4 para Salir :)'
 
@@ -69,6 +69,7 @@ def create_average_score_file(file_name)
     file.write " #{student_average_score} \n"
   end
   file.close
+  puts "El archivo 'PromedioNotas' ha sido creado :)"
 end
 
 # Opción 2
